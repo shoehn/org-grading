@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Criterium Section
+# key: criterium_section
+# condition: t
+# --
+
+** ${1:Criterium Name}
+:PROPERTIES:
+:evaluation: true
+:points: ${2:25}
+:total: ${3:25}
+:END:
+${4:The student has demonstrated .}

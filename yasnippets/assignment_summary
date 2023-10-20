@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: assignment summary table
+# uuid:
+# key: assignment_summary
+# condition: t
+# --
+
+#+BEGIN: propview :id "${2:Evaluation Criteria}" :conds ((string= EVALUATION "true")) :cols (ITEM TOTAL POINTS)
+
+
+#+TBLFM: @>\$>=vsum(@I..II)::@>\$2=vsum(@I..II)
+#+END
