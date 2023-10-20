@@ -1,0 +1,156 @@
+#+TITLE:     Gradingsheet
+#+AUTHOR:    Sebastian Höhn
+#+EMAIL:     sebastian.hoehn@bfh.ch
+#+DATE:      <2023-10-19 Thu>
+#+DESCRIPTION: This template is used for grading student assignments and exams. It includes snippets for easy insertion of criteria sections and summary tables.
+#+KEYWORDS:
+#+KEYWORDS:
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper]
+#+LATEX_HEADER: \usepackage[hidelinks,plainpages=false,pdfpagelabels,pdfusetitle,hypertexnames = {true}]{hyperref}
+#+LANGUAGE:  en
+#+OPTIONS:   H:2 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+
+#+BEGIN_SRC elisp :exports none
+(load-file "./grading-functions.el")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+
+* Documentation :noexport:
+  - This grading sheet template is designed to streamline the process of grading student assignments and exams.
+  - Use the provided snippets to quickly insert criteria sections and summary tables.
+  - Update the student information section with the specific details of the student being graded.
+  - The grading summary will automatically calculate the total points and grade based on the entered data.
+
+* Snippets :noexport:
+  - Criteria Section: Use the `criteria` snippet to insert a new criteria section. Update the properties with the specific grading details.
+  - Summary Table: Use the `propview` snippet to insert a summary table that automatically calculates the total points and grade.
+
+* Student Information
+  - Name: [Enter Student's Name]
+  - Matriculation Number: [Enter Matriculation Number]
+  - Date of Examination: [Enter Date]
+
+* Grading Summary
+
+Execute the code block below with =~C-c C-c= to generate the grading summary table.
+
+#+BEGIN_SRC elisp :exports results
+(sh-generate-summary-table)
+#+END_SRC
+
+#+RESULTS:
+| Criteria              | Obtained Points | Maximum Points |
+|-----------------------+-----------------+----------------|
+| Example Criterion 1.1 |              20 |             25 |
+| Example Criterion 1.2 |              20 |             25 |
+| Example Criterion 2.1 |              20 |             25 |
+| Example Criterion 2.2 |              20 |             25 |
+|-----------------------+-----------------+----------------|
+| Total Points          |              80 |            100 |
+|-----------------------+-----------------+----------------|
+| **Grading**           |             5.0 |              5 |
+
+\clearpage
+
+* Sample Assignment 1
+:PROPERTIES:
+:ID:  sample1
+:END:
+
+Run the propview evaluation by putting the cursor on the #+BEGIN line and press =~C-c C-c=. Check the  =~ID= property under the section heading to see how the  =~propview= is controlled to collect the data.
+
+#+NAME: tab_evaluation_summary1
+#+BEGIN: propview :id "sample1" :conds ((string= EVALUATION "true")) :cols (ITEM TOTAL POINTS)
+| ITEM                    | TOTAL | POINTS |
+|-------------------------+-------+--------|
+| "Example Criterion 1.1" |    25 |     20 |
+| "Example Criterion 1.2" |    25 |     20 |
+|-------------------------+-------+--------|
+|                         |    50 |     40 |
+#+TBLFM: @>$>=vsum(@I..II)::@>$2=vsum(@I..II)
+#+END
+
+** Example Criterion 1.1
+:PROPERTIES:
+:evaluation: true
+:points: 20
+:total: 25
+:END:
+
+Check the properties drawer below the header to see the points and totals for that criterion.
+
+I typically use these two subheadings for the sheet. A description with a generic explanation what we evaluated in that criterion and a feeback section with personalized feedback for the students based on how they performed.
+
+*** Description
+Explain how you e.g. would evaluate and grade the students' knowledge of the topic.
+
+*** Feedback
+The student demonstrated an excellent understanding of the topic.
+
+** Example Criterion 1.2
+:PROPERTIES:
+:evaluation: true
+:points: 20
+:total: 25
+:END:
+The student demonstrated an excellent understanding of the topic.
+
+
+* Sample Assignment 2
+:PROPERTIES:
+:ID:  sample2
+:END:
+
+Here another  =~ID= is used to separate the summary per assignment.
+
+#+NAME: tab_evaluation_summary2
+#+BEGIN: propview :id "sample2" :conds ((string= EVALUATION "true")) :cols (ITEM TOTAL POINTS)
+| ITEM                    | TOTAL | POINTS |
+|-------------------------+-------+--------|
+| "Example Criterion 2.1" |    25 |     20 |
+| "Example Criterion 2.2" |    25 |     20 |
+|-------------------------+-------+--------|
+|                         |    50 |     40 |
+#+TBLFM: @>$>=vsum(@I..II)::@>$2=vsum(@I..II)
+#+END
+
+** Example Criterion 2.1
+:PROPERTIES:
+:evaluation: true
+:points: 20
+:total: 25
+:END:
+
+The student demonstrated an excellent understanding of the topic.
+
+** Example Criterion 2.2
+:PROPERTIES:
+:evaluation: true
+:points: 20
+:total: 25
+:END:
+The student demonstrated an excellent understanding of the topic.
+
+
+
+* Notes
+   - Add any additional notes or feedback for the student here.
+
+* Final Grade
+   - Grade:
+   - Comments:
+
+* Examiner
+   - Name:
+   - Date: <2023-10-20 Fri>
+
+* Usage Instructions :noexport:
+  - Update the student information section with the specific details of the student being graded.
+  - Use the provided snippets to add criteria sections and summary tables as needed.
+  - Execute the elisp code blocks to generate the grading summary and calculate the final grade.
+  - Review and finalize the grading sheet before sharing it with the student.
